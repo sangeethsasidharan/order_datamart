@@ -7,7 +7,11 @@ def format_column_names(df):
     Output : df with correct column names
     Purpose: To replce '-' and space from column name with _
     """
-  return df.select([F.col(column).alias(column.lower().replace('-', '_').replace(' ', '_')) for column in df.columns])
+    return df\
+       .select(
+           [
+               F.col(column).alias(column.lower().replace('-', '_').replace(' ', '_')) for column in df.columns]
+           )
 
 def save_table(spark, df, env_name , table_name):
   spark.sql(f"create schema IF NOT EXISTS {env_name}")
